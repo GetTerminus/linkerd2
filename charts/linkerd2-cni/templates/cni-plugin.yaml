@@ -266,6 +266,10 @@ spec:
         securityContext:
           readOnlyRootFilesystem: true
           privileged: {{.Values.privileged}}
+        {{- if .Values.resources }}
+        resources:
+          {{- include "partials.resources" .Values.resources | nindent 10 }}
+        {{- end }}
       volumes:
       {{- if ne .Values.destCNIBinDir .Values.destCNINetDir }}
       - name: cni-bin-dir
